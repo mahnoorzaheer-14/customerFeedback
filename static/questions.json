@@ -1,0 +1,42 @@
+[
+    {
+        "Q": "How likely would you reccommend LAAM to your friends or family?",
+        "ans": [
+            "poor",
+            "dislike",
+            "neutral",
+            "like",
+            "love"
+        ]
+    },
+    {
+        "Q": "How was your website experience?",
+        "ans": [
+            "poor",
+            "dislike",
+            "neutral",
+            "like",
+            "love"
+        ]
+    },
+    {
+        "Q": "How was your delievery experience?",
+        "ans": [
+            "poor",
+            "dislike",
+            "neutral",
+            "like",
+            "love"
+        ]
+    },
+    {
+        "Q": "What is the one thing we could do to make to improve your experience?",
+        "ans": [
+            "poor",
+            "dislike",
+            "neutral",
+            "like",
+            "love"
+        ]
+    }
+]
