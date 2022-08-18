@@ -1,75 +1,59 @@
 <template>
     <div id='card-top'>
-        <div class="flex justify-center">
-            <div class="card bg-white lg:w-[50rem] md:w-24">
-                <div class="card-body">
-                    <p class="mb-4 text-lg">{{ sawaal }}</p>
-                    <!-- <p class="mb-4 text-lg">{{ rating }}</p> -->
-                    <div class="grid grid-cols-3">
-                        <div>
-                            <p class="mt-12 ml-14 text-sm">Not at all likely</p>
+        <div class="card bg-white rounded-none md:rounded-2xl lg:rounded-2xl">
+            <div class="card-body -mt-1">
+                <p class="mb-4 text-[16px]">How likely would your reccomend LAAM to your friends and family?</p>
+                <div class="pb-8 md:pb-0 lg:-mt-1 lg:pb-2.5">
+                    <div class="to-left font-inter text-[#666666]">Not at all likely</div>
+                    <div class="flex justify-center space-x-8 lg:space-x-10 ">
+                        <div class="form-check form-check-inline grid grid-rows-2 space-y-3">
+                            <label class="ml-1.5">1</label>
+                            <input type="radio" value=1
+                                class="h-[1.20rem] w-[1.20rem] focus:text-black checked:text-black focus:ring-0"
+                                v-model="rating" @input="setRating" />
                         </div>
-                        <div>
-                            <div class="flex justify-center space-x-10 sm:space-x-6">
-
-                                <div class="form-check form-check-inline grid grid-rows-2 space-y-4">
-                                    <label class="form-check-label inline-block text-gray-800 ml-1.5"
-                                        for="inlineRadio10">1</label>
-                                    <input type="radio" id="one" value=1 class="h-[1.20rem] w-[1.20rem]"
-                                        v-model="rating" />
-                                </div>
-                                <div class="form-check form-check-inline grid grid-rows-2 space-y-4">
-                                    <label class="form-check-label inline-block text-gray-800 ml-1.5"
-                                        for="inlineRadio20">2</label>
-                                    <input type="radio" id="two" value=2 class="h-[1.20rem] w-[1.20rem]"
-                                        v-model="rating" />
-                                </div>
-                                <div class="form-check form-check-inline grid grid-rows-2 space-y-4">
-                                    <label class="form-check-label inline-block text-gray-800 ml-1.5"
-                                        for="inlineRadio10">3</label>
-                                    <input type="radio" id="three" value=3 class="h-[1.20rem] w-[1.20rem]"
-                                        v-model="rating" />
-                                </div>
-                                <div class="form-check form-check-inline grid grid-rows-2 space-y-4">
-                                    <label class="form-check-label inline-block text-gray-800 ml-1.5"
-                                        for="inlineRadio10">4</label>
-                                    <input type="radio" id="four" value=4 class="h-[1.20rem] w-[1.20rem]"
-                                        v-model="rating" />
-                                </div>
-                                <div class="form-check form-check-inline grid grid-rows-2 space-y-4">
-                                    <label class="form-check-label inline-block text-gray-800 ml-1.5"
-                                        for="inlineRadio10">5</label>
-                                    <input type="radio" id="five" value=5 class="h-[1.20rem] w-[1.20rem]"
-                                        v-model="rating" />
-                                </div>
-                            </div>
+                        <div class="form-check form-check-inline grid grid-rows-2 space-y-3">
+                            <label class="ml-1.5" for="inlineRadio20">2</label>
+                            <input type="radio" id="two" value=2
+                                class="h-[1.20rem] w-[1.20rem] focus:text-black checked:text-black focus:ring-0"
+                                v-model="rating" @input="setRating" />
                         </div>
-                        <div>
-                            <p class="mt-12 ml-20 text-sm">Extremely likely</p>
+                        <div class="form-check form-check-inline grid grid-rows-2 space-y-3">
+                            <label class="ml-1.5" for="inlineRadio10">3</label>
+                            <input type="radio" id="three" value=3
+                                class="h-[1.20rem] w-[1.20rem] focus:text-black checked:text-black focus:ring-0"
+                                v-model="rating" @input="setRating" />
+                        </div>
+                        <div class="form-check form-check-inline grid grid-rows-2 space-y-3">
+                            <label class="ml-1.5" for="inlineRadio10">4</label>
+                            <input type="radio" id="four" value=4
+                                class="h-[1.20rem] w-[1.20rem] focus:text-black checked:text-black focus:ring-0"
+                                v-model="rating" @input="setRating" />
+                        </div>
+                        <div class="form-check form-check-inline grid grid-rows-2 space-y-3">
+                            <label class="ml-1.5" for="inlineRadio10">5</label>
+                            <input type="radio" id="five" value=5
+                                class="h-[1.20rem] w-[1.20rem] focus:text-black checked:text-black focus:ring-0"
+                                v-model="rating" @input="setRating" />
                         </div>
                     </div>
-
+                    <div class="to-right font-inter text-[#666666]">Extremely Likely</div>
                 </div>
             </div>
-        </div>
-        <div v-if="rating == 1">
-
-            <AnotherComponent />
         </div>
     </div>
 
 </template>
 
 
-<script lang="ts">
+<script>
 
 import Vue from 'vue'
 import Dislike from "~/assets/Dislike.svg?inline";
 import Neutral from "~/assets/Neutral.svg?inline";
 import Poor from "~/assets/Poor.svg?inline";
 import AnotherComponent from './AnotherComponent.vue'
-import { MediaQueryProvider, MatchMedia } from 'vue-component-media-queries'
-
+import axios from 'axios';
 // import 'tw-elements';
 
 
@@ -90,71 +74,49 @@ export default Vue.extend({
             isHidden5: false,
             selected: '',
             rating: String,
-
-
-
-            // jawaab: {
-            //     "key1": [this.answer[0], Heart],
-            //     "key2": [this.answer[1], Vector],
-            //     "key3": [this.answer[2], Vector],
-            //     "key4": [this.answer[3], Vector],
-            //     "key5": [this.answer[4], Vector],
-            // },
+            error: null
         }
     },
 
     components: {
         Dislike, Neutral, Poor, AnotherComponent,
     },
+    mounted: function () {
+        console.log("In card top, json data", this.$store.state.jsonData)
+        console.log("recomended" in (this.$store.getters['EmojiStore/getJsonData']))
+        if ("recomended" in (this.$store.getters['EmojiStore/getJsonData'])) {
+            this.rating = (this.$store.getters['EmojiStore/getJsonData'])["recomended"]
+            this.$emit('rating', this.rating);
+        }
+    },
+
+    computed: {
+        // storeRating() {
+        //     return this.$store.state.storeRating
+        // }
+    },
 
     methods: {
-        changeSVG(reaction: string) {
-            console.log(reaction)
-            return Dislike
+        setRating(event) {
+            console.log("inside rating", event.target.value)
+            this.$store.commit('EmojiStore/setRating', ["recomended", event.target.value])
+            this.$emit('rating', event.target.value);
         },
-        // onChange(event) {
-        //     var data = event.target.value;
-        //     console.log(data);
-        // },
-        appear1() {
-            return (this.isHidden2 = false,
-                this.isHidden3 = false,
-                this.isHidden4 = false,
-                this.isHidden5 = false)
-        },
-        appear2() {
-            return (this.isHidden1 = false,
-                this.isHidden3 = false,
-                this.isHidden4 = false,
-                this.isHidden5 = false)
 
-        },
-        appear3() {
-            return (this.isHidden2 = false,
-                this.isHidden1 = false,
-                this.isHidden4 = false,
-                this.isHidden5 = false)
-
-        },
-        appear4() {
-            return (this.isHidden2 = false,
-                this.isHidden3 = false,
-                this.isHidden1 = false,
-                this.isHidden5 = false)
-        },
-        appear5() {
-            return (this.isHidden1 = false,
-                this.isHidden3 = false,
-                this.isHidden4 = false,
-                this.isHidden2 = false)
-
-        },
-        captureRating(rate: number): void {
-            console.log(this.rating)
-            console.log(rate)
-
+        async sendRating(event) {
+            // console.log("eventt", event.target.value)
+            // this.$store.commit('EmojiStore/setRating', event.target.value)
+            // this.$emit('rating', event.target.value);
+            // try {
+            //     // const response = await axios.post('http://localhost:1337/api/restaurants', this.modifiedData)
+            //     const obj = { meta: { "recomended": event.target.value } }
+            //     await axios.post(`http://127.0.0.1:8080/laamfeedback/${'jcbcdhcj'}`, obj)
+            // } catch (error) {
+            //     console.log("Error encountered", error);
+            // }
 
         }
+
 
     }
 
@@ -175,6 +137,38 @@ export default Vue.extend({
 .visibility:hover .icon-b,
 .visibility:focus .icon-b {
     display: block;
+}
+
+.to-left {
+    position: absolute;
+    bottom: 38px;
+    left: 85px;
+    font-size: 15px;
+}
+
+.to-right {
+    position: absolute;
+    bottom: 38px;
+    right: 70px;
+    font-size: 15px;
+}
+
+@media (max-width: 640px) {
+
+    .to-left {
+        position: absolute;
+        bottom: 30px;
+        left: 32px;
+        font-size: 14px;
+    }
+
+    .to-right {
+        position: absolute;
+        bottom: 30px;
+        right: 32px;
+        font-size: 14px;
+
+    }
 }
 
 /* a:link,

@@ -1,23 +1,30 @@
 <template>
-    <nav class="relative w-screen flex items-center justify-between py-4 bg-[#222222] text-white-500 shadow-lg">
-        <div class="container-fluid w-full flex flex-wrap items-center justify-between px-6">
-            <a class="text-xl text-white" href="#"> LAAM
-                <!-- <div justify="center" align="center" class="pt-4">
-                    <LaamLogo />
-                </div> -->
-            </a>
-        </div>
+    <nav class="flex items-center justify-center py-2 bg-[#222222] shadow w-full">
+
+        <div class="flex justify-center"></div>
+        <!-- <a href="/"> -->
+        <LaamLogo class=" w-[90px] -my-1 md:w-28 lg:w-28 md:my-1 lg:my-1" />
+        <!-- </a> -->
+        <!-- <div class="flex-1 pr-3">
+            <Close class="w-12 ml-auto" />
+        </div> -->
+
     </nav>
 </template>
 
 <script>
 
-import LaamLogo from "./LaamLogo.vue";
 import Vue from 'vue';
+import LaamLogo from "~/assets/LaamLogo.svg?inline";
+import Close from "~/assets/Close.svg?inline";
+
+
 
 
 export default Vue.extend({
     name: "Navbar",
-    components: { LaamLogo }
+    components: {
+        LaamLogo, Close
+    }
 })
 </script>

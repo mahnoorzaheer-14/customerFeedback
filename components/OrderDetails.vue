@@ -103,13 +103,6 @@ import NeutralColored from "~/assets/NeutralColored.svg?inline";
 // import { useEmojiStore } from "@/stores/EmojiStore";
 import store from '~/store/EmojiStore.js';
 import { mapActions, mapGetters } from "vuex";
-// import { EmojiStore } from 'vuex'
-
-
-
-
-
-
 
 
 export default Vue.extend({
@@ -165,19 +158,22 @@ export default Vue.extend({
     },
 
     mounted: function () {
-        // this.randDictionary = this.$store.getters['emojiStore/getDictionary']
         console.log("*************")
-
-        // this.randDictionary = this.$store.getters['emojiStore/getDictionary']
 
         for (let i = 0; i < this.details.length; i++) {
             // console.log("Block statement execution no." + i);
             this.str1 = this.details[i].name
-            this.str2 = (this.details[i].ID).toString()
+            let tempStr = this.details[i].ID
+            tempStr = "" + tempStr
+            this.str2 = tempStr
+            // this.str2 = (this.details[i].ID).toString()
             this.fullState = this.str1.concat(this.str2.toString());
             this.fullState = this.fullState.replace(/\s/g, '')
             this.item_id.push(this.fullState);
-            this.itemStateDict[i.toString()] = false
+            i = "" + i
+            // this.itemStateDict[i.toString()] = false
+            this.itemStateDict[i] = false
+
 
         }
 

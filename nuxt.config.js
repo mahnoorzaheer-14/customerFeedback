@@ -12,6 +12,11 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
+      {
+        rel: "icon",
+        type: 'image/svg',
+        href: "https://cdn.shopify.com/s/files/1/2337/7003/files/favicon.svg?v=1652946186",
+      },
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
@@ -20,12 +25,36 @@ export default {
   css: ['@/assets/css/main.css',
   ],
 
+  router: {
+    extendRoutes(routes, resolve) {
+      return [
+        // {
+        //   name: 'collection-pages',
+        //   path: '/collections/*', // <--- change this
+        //   component: resolve(__dirname, 'pages/collections'),
+        //   chunkName: 'pages/collection'
+        // },
+        {
+          name: 'feedback-page',
+          path: '/*', // <--- change this
+          component: resolve(__dirname, 'pages/index'),
+          chunkName: 'pages/index'
+        },
+      ]
+    }
+  },
+
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
+
+  env: {
+    baseUrl: process.env.BASE_URL || 'http://localhost:5000'
+  },
+
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [

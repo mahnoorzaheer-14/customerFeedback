@@ -1,25 +1,25 @@
 [
     {
-        "ID": 1,
-        "OrderNum": 123456,
-        "name": "Organza Shirt",
-        "brand": "Elan",
+        "id": 1,
+        "orderNum": 123456,
+        "title": "Organza Shirt",
+        "brand_name": "Elan",
         "Qty": 1,
         "image": "image/ProductImage.png"
     },
     {
-        "ID": 2,
-        "OrderNum": 123467,
-        "name": "Organza Shirt",
-        "brand": "Elan",
+        "id": 2,
+        "orderNum": 123467,
+        "title": "Organza Shirt",
+        "brand_name": "Elan",
         "Qty": 1,
         "image": "image/ProductImage.png"
     },
     {
-        "ID": 3,
-        "OrderNum": 123478,
-        "name": "Organza Shirt",
-        "brand": "Elan",
+        "id": 3,
+        "orderNum": 123478,
+        "title": "Organza Shirt",
+        "brand_name": "Elan",
         "Qty": 1,
         "image": "image/ProductImage.png"
     }

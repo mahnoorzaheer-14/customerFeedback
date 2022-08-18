@@ -1,0 +1,33 @@
+# Execute by: gcloud builds submit --config ./staging_build_deploy.yaml
+steps:
+  # Build the container image
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "build",
+        "-t",
+        "gcr.io/sellerapp-laam/staging-feedback-form-frontend",
+        "-f",
+        "./Dockerfile",
+        ".",
+      ]
+  # Push the container image to Container Registry
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["push", "gcr.io/sellerapp-laam/staging-feedback-form-frontend"]
+  # Deploy container image to Cloud Run
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    entrypoint: gcloud
+    args:
+      [
+        "run",
+        "deploy",
+        "staging-feedback-form-frontend",
+        "--image",
+        "gcr.io/sellerapp-laam/staging-feedback-form-frontend",
+        "--region",
+        "us-central1",
+        "--platform",
+        "managed",
+      ]
+images:
+  - gcr.io/sellerapp-laam/staging-feedback-form-frontend
