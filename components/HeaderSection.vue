@@ -1,20 +1,16 @@
 <template>
     <div>
-        <div class="flex flex-col items-center">
-            <div class="flex flex-row">
-                <h3
-                    class="font-inter text-base antialiased font-bold font-feature-default mt-10 font-inter tracking-wide text-[#222222] text-3xl">
-                    We would love your
-                    feedback!</h3>
-            </div>
-            <p class="text-[1.28rem] m-[3px] text-[#666666]">This feedback is for {{ itemCount[0] }} out of {{
-                    itemCount[1]
-            }} items
+        <div class="flex flex-col items-center mt-10">
+            <div class=" r-text-size font-inter font-semibold text-center">We would love your
+                feedback</div>
+            <p class="tag-text -my-1 text-[#666666] text-center">This feedback is for {{
+                    $store.state.EmojiStore.order_count["shipped_items_num"]
+            }} out of
+                {{ $store.state.EmojiStore.order_count["order_items_num"] }} items
                 in
                 your
                 order</p>
         </div>
-
     </div>
 
 </template>
@@ -32,6 +28,25 @@ export default Vue.extend({
         itemCount: Array
     }
 })
-
-
 </script>
+
+<style>
+.r-text-size {
+    font-size: 35px;
+}
+
+.tag-text {
+    font-size: 23px;
+}
+
+
+@media (max-width: 640px) {
+    .r-text-size {
+        font-size: 20px;
+    }
+
+    .tag-text {
+        font-size: 14px;
+    }
+}
+</style>

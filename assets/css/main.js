@@ -7,3 +7,7 @@ new Vue({
     components: { App },
     template: '<App/>'
 })
+
+
+import VueMobileDetection from 'vue-mobile-detection'
+Vue.use(VueMobileDetection)
