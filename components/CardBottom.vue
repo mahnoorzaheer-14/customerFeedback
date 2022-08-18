@@ -26,6 +26,7 @@ import _ from 'lodash';
 export default Vue.extend({
     name: "CardBottom",
     data() {
+
         return {
             message: '',
             mobile_msg: ''
