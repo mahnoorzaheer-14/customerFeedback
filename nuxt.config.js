@@ -28,15 +28,9 @@ export default {
   router: {
     extendRoutes(routes, resolve) {
       return [
-        // {
-        //   name: 'collection-pages',
-        //   path: '/collections/*', // <--- change this
-        //   component: resolve(__dirname, 'pages/collections'),
-        //   chunkName: 'pages/collection'
-        // },
         {
           name: 'feedback-page',
-          path: '/*', // <--- change this
+          path: '/*',
           component: resolve(__dirname, 'pages/index'),
           chunkName: 'pages/index'
         },
@@ -52,7 +46,7 @@ export default {
   components: true,
 
   env: {
-    baseUrl: process.env.BASE_URL || 'http://localhost:5000'
+    baseUrl: process.env.BASE_URL || 'https://feedbacks.laam.pk'
   },
 
 
@@ -62,10 +56,6 @@ export default {
     '@nuxtjs/tailwindcss',
     "@nuxtjs/svg",
     '@nuxt/postcss8',
-    // '@nuxtjs/composition-api/module',
-    // '@pinia/nuxt',
-
-
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules

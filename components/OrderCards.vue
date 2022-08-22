@@ -103,7 +103,6 @@
                         <p class="mobile text-[13px] font-inter text-[#888888] italic mb-2">Can select multiple
                             options
                         </p>
-                        <!-- {{ checkedNames[items - 1] }} -->
                         <ul class=" flex flex-wrap pb-5">
                             <li v-for="i in options.length" class="pr-2 mt-2 md:pr-3 lg:pr-3 md:mt-3 lg:mt-3">
                                 <input type="checkbox" :id="(options[i - 1]).concat(items - 1)"
@@ -128,22 +127,16 @@
 
 
 <script>
-import axios from 'axios';
-
 
 export default ({
     name: "OrderCards",
     data() {
         return {
             itemsYesNo: {},
-            temp: [{ key: 1, value: [] }, { key: 2, value: [] }, { key: 3, value: [] }],
             YesNoList: [],
             str1: '',
             checkedNames: [],
-            selected: [],
             options: ['Fabric Quality', 'Insufficient Merchandise', 'Insufficient Fabric', 'Stitching Quality', 'Color Difference', 'Damaged Product', 'Different to picture', 'Size Chart'],
-
-
 
         }
     },
@@ -151,79 +144,20 @@ export default ({
         details: [],
         storeDiction: {}
     },
-    // mounted: function () {
-    //     console.log("In order cards, json data", (this.$store.getters['EmojiStore/getJsonData']))
-    //     // if ("improve_experience" in (this.$store.getters['EmojiStore/getJsonData'])) {
-    //     //     this.message = (this.$store.getters['EmojiStore/getJsonData'])["improve_experience"]
-    //     // }
-    // },
     methods: {
         setMatch(event) {
-            console.log("vendor match", event.target.value)
             var parse = event.target.value.split("-", 2)
             this.$store.state.EmojiStore.anotherDict["match_item_" + parse[1]] = parse[0]   // {match_item_5:Yes}
             this.$store.state.EmojiStore.keywordItemID["itemID"] = this.$store.state.EmojiStore.anotherDict  // {itemID:{match_item_5:Yes}}
-            // console.log("now check ", this.$store.state.EmojiStore.keywordItemID)
-
             this.$store.commit('EmojiStore/setVendorMatch', this.$store.state.EmojiStore.keywordItemID)
-
         },
         setIssues(event) {
-            console.log("issues with vendor", event.target.value)
             var parse = event.target.value.split("-", 3)
-            console.log("parse", parse)
-            var key = "P" + parse[1] + "_issues"
-            // console.log(typeof (parse[1]))
             var iteration_num = +parse[2]
-            var itemIssuesDict = this.checkedNames[iteration_num]
             this.$store.state.EmojiStore.anotherDict["issues_item_" + parse[1]] = this.checkedNames[iteration_num].value // {issues_item_5:["Fabric Quality"]}
             this.$store.state.EmojiStore.keywordItemID["itemID"] = this.$store.state.EmojiStore.anotherDict  // {itemID:{match_item_5:Yes}}
-            // console.log("now check in issues", this.$store.state.EmojiStore.keywordItemID)
-
-
-
-
-            // var prod_id: number = +parse[1]
-
-            // // console.log(typeof (prod_id))
-
-            // console.log(this.checkedNames[iteration_num])
-
             this.$store.commit('EmojiStore/setVendorIssues', this.$store.state.EmojiStore.keywordItemID)
-
         },
-        async sendSellerFeedback_match(event) {
-        },
-
-        async sendSellerFeedback_disappointment(id, match, satisfaction, disappointment) {
-
-            try {
-                // const response = await axios.post('http://localhost:1337/api/restaurants', this.modifiedData)
-                let feedback_num = ("seller_feedback_P").concat(id)
-                const obj = { meta: { feedback_num: { 'disappointment': disappointment } } }
-                await axios.post('https://staging-feedback-form-7j5z7gqdsa-uc.a.run.app/test2', obj)
-            } catch (error) {
-                console.log("Error encountered", error);
-            }
-
-        },
-
-        // const obj = { meta: { feedback_num : {'match': match, 'satisfaction': satisfaction, 'disappointment': disappointment} } }
-
-
-        deactiveButtons(choosen, ind) {
-            if (choosen.length > 2 && choosen.indexOf(ind) === -1) {
-                return true
-            }
-            return false
-        },
-
-        notChoosen(elem, inputList) {
-            if (inputList.includes(elem) == false) {
-                return true
-            }
-            return false
-        }
     },
     mounted: function () {
         for (let i = 0; i < this.details.length; i++) {
@@ -232,57 +166,27 @@ export default ({
             this.YesNoList.push('');
             this.$store.commit('EmojiStore/addArrays', [])
             this.id = this.details[i].ID
-            console.log("details", this.details[i].id)
             this.checkedNames.push({ key: this.details[i].id, value: [] })
         }
 
-        console.log("In order cards, json data", (this.$store.getters['EmojiStore/getJsonData']))
         for (let j = 0; j < this.details.length; j++) {
-            console.log(this.details[j].id)
-
-
             if ("itemID" in (this.$store.getters['EmojiStore/getJsonData'])) {
 
                 let tempDiction = (this.$store.getters['EmojiStore/getJsonData'])["itemID"]
-
-
                 let tempKeyword1 = "match_item_" + this.details[j].id
                 let tempKeyword2 = "issues_item_" + this.details[j].id
-
-                // setting already exisiting match value
                 if (tempKeyword1 in tempDiction) {
 
                     this.YesNoList[j] = tempDiction[tempKeyword1] + "-" + this.details[j].id
                 }
-
-                // setting already exisiting issues value []
                 if (tempKeyword2 in tempDiction) {
 
                     this.checkedNames[j].value = tempDiction[tempKeyword2]
 
                 }
             }
-            // let keyword2 = "P" + this.details[j].id + "_issues"
-            // if (keyword2 in (this.$store.getters['EmojiStore/getJsonData'])) {
-            //     console.log("CHECK HERE OR NOT", this.checkedNames[j])
-            //     let tempDict = {}
-            //     // tempDict = this.checkedNames[j]
-
-            //     // tempDict[this.details[j].id] = (this.$store.getters['EmojiStore/getJsonData'])[keyword2]
-            //     this.checkedNames[j].value = (this.$store.getters['EmojiStore/getJsonData'])[keyword2]
-            //     console.log(this.checkedNames)
-            //     console.log(this.checkedNames[j].value)
-            // }
-
         }
-
-
-
-
     },
-
-
-
 })
 
 
